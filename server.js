@@ -22,7 +22,7 @@ http.createServer((request, response) => {
 
   // check that the exact pathname of the entered URL is 
   if (q.pathname.includes('documentation')) {
-    filePath = (_dirname + '/documentation.html');
+    filePath = (__dirname + '/documentation.html');
   } else {
     filePath = 'index.html';
   }
