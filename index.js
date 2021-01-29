@@ -7,12 +7,10 @@ app.use(morgan('common'));
 
 let topTenMovies = []
 
+app.use('/documentation', express.static('public'));
+
 app.get('/', (req, res) => {
     res.send('Welcome to Movie Mania!');
-});
-
-app.get('/documentation', (req, res) => {
-    res.sendFile('public/documentation.html', { root: __dirname });
 });
 
 app.get('/movies', (req, res) => {
