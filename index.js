@@ -3,11 +3,16 @@ const express = require('express'),
 
 const app = express();
 
-app.use(morgan('common'));
-
 let topTenMovies = []
 
+// Middleware
+app.use(morgan('common'));
 app.use(express.static('public'));
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Oops...something went wrong!');
+});
 
 app.get('/', (req, res) => {
     res.send('Welcome to Movie Mania!');
@@ -15,11 +20,6 @@ app.get('/', (req, res) => {
 
 app.get('/movies', (req, res) => {
     res.json(topTenMovies);
-});
-
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Oops...something went wrong!');
 });
 
 app.listen(8080, () => {
