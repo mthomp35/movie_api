@@ -3,7 +3,20 @@ const express = require('express'),
 
 const app = express();
 
-let topTenMovies = []
+let topTenMovies = [
+    {
+        title: 'The birds',
+        year: '2000'
+    },
+    {
+        title: 'The birds 2',
+        year: '2001'
+    },
+    {
+        title: '8 more movie titles',
+        year: '8 more years'
+    }
+];
 
 // Middleware
 app.use(morgan('common'));
