@@ -5,12 +5,18 @@ const app = express();
 
 app.use(morgan('common'));
 
+let topTenMovies = []
+
 app.get('/', (req, res) => {
-    res.send('Welcome to my app!');
+    res.send('Welcome to Movie Mania!');
 });
 
-app.get('/secreturl', (req, res) => {
-    res.send('This is a secret url');
+app.get('/documentation', (req, res) => {
+    res.sendFile('public/documentation.html', { root: __dirname });
+});
+
+app.get('/movies', (req, res) => {
+    res.json(topTenMovies);
 });
 
 app.listen(8080, () => {
