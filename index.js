@@ -7,7 +7,7 @@ app.use(morgan('common'));
 
 let topTenMovies = []
 
-app.use('/documentation', express.static('public'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.send('Welcome to Movie Mania!');
@@ -15,6 +15,11 @@ app.get('/', (req, res) => {
 
 app.get('/movies', (req, res) => {
     res.json(topTenMovies);
+});
+
+app.use((err, req, res, next) => {
+    log.txt(err.stack);
+    res.status(500).send('Oops...something went wrong!');
 });
 
 app.listen(8080, () => {
