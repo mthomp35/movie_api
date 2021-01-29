@@ -18,7 +18,7 @@ app.get('/movies', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-    log.txt(err.stack);
+    console.error(err.stack);
     res.status(500).send('Oops...something went wrong!');
 });
 
