@@ -14,6 +14,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Oops...something went wrong!');
 });
 
+// GET requests
 app.get('/', (req, res) => {
     res.send('Welcome to Movie Mania!');
 });
