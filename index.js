@@ -32,8 +32,15 @@ app.get('/', (req, res) => {
     res.send('Welcome to Movie Mania!');
 });
 
+// Return list of all movies
 app.get('/movies', (req, res) => {
-    res.json(topTenMovies);
+    res.json(allMovies);
+    res.send('Successful GET request returning all movies');
+});
+
+// Return data about a single movie by title
+app.get('/movies', (req, res) => {
+    res.send('Successful GET request returning data about a single movie based on title');
 });
 
 app.listen(8080, () => {
