@@ -44,7 +44,7 @@ app.get('/movies/:title', (req, res) => {
 });
 
 // Return data about a genre by title
-app.get('/genres/:title', (req, res) => {
+app.get('/movies/genres/:title', (req, res) => {
     res.send('Successful GET request returning data about a genre based on movie title');
 });
 
