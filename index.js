@@ -53,6 +53,13 @@ app.get('/directors/:name', (req, res) => {
     res.send('Successful GET request returning data about a director based on name');
 });
 
+// Return list of all users
+app.get('/users', (req, res) => {
+    res.send('Successful GET request returning list of all users');
+});
+
+
+
 app.listen(8080, () => {
     console.log('This app is listening to port 8080.');
 });
