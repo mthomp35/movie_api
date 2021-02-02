@@ -63,6 +63,11 @@ app.post('/users', (req, res) => {
     res.send('Successfully POST (create) new user and return 201 status with success message');
 });
 
+// Allow users to update their user info based on username
+app.put('/users/:username', (req, res) => {
+    res.send('Successfully PUT (update) user info and return 201 status with success message');
+});
+
 
 
 app.listen(8080, () => {
