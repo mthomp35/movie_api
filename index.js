@@ -73,6 +73,11 @@ app.put('/users/:username/favorites/:title', (req, res) => {
     res.send('Successfully PUT (add) movie title to user favorites list and return 201 status with success message');
 });
 
+// Allow users to remove a movie from their list of favorites
+app.delete('/users/:username/favorites/:title', (req, res) => {
+    res.send('Successfully DELETE (remove) movie title from user favorites list and return 201 status with success message');
+});
+
 app.listen(8080, () => {
     console.log('This app is listening to port 8080.');
 });
