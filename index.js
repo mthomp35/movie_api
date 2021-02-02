@@ -68,7 +68,10 @@ app.put('/users/:username', (req, res) => {
     res.send('Successfully PUT (update) user info and return 201 status with success message');
 });
 
-
+// Allow users to add a movie to their list of favorites
+app.put('/users/:username/favorites/:title', (req, res) => {
+    res.send('Successfully PUT (add) movie title to user favorites list and return 201 status with success message');
+});
 
 app.listen(8080, () => {
     console.log('This app is listening to port 8080.');
