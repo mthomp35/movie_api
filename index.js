@@ -58,6 +58,11 @@ app.get('/users', (req, res) => {
     res.send('Successful GET request returning list of all users');
 });
 
+// Register new users
+app.post('/users', (req, res) => {
+    res.send('Successfully POST (create) new user and return 201 status with success message');
+});
+
 
 
 app.listen(8080, () => {
