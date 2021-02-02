@@ -13,6 +13,76 @@
     <h1>About the Movie API</h1>
     <h2>Objective</h2>
         <p>To build the server­side component of a “movies” web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies. </p>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Request Method</th>
+            <th>URL Endpoint</th>
+            <th>Response</th>
+        </tr>
+        <tr>
+            <td>Return list of all movies</td>
+            <td>GET</td>
+            <td>/movies</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Return data about a single movie by title</td>
+            <td>GET</td>
+            <td>/movies/:title</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Return data about a genre by title</td>
+            <td>GET</td>
+            <td>/movies/genres/:title</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Return data about a director by name</td>
+            <td>GET</td>
+            <td>/movies/directors/:name</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Return list of all users</td>
+            <td>GET</td>
+            <td>/users</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Allow new users to register</td>
+            <td>POST</td>
+            <td>/users</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Allow users to update their user info based on username</td>
+            <td>PUT</td>
+            <td>/users/:username</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Allow users to add a movie to their list of favorites</td>
+            <td>PUT</td>
+            <td>/users/:username/favorites/:title</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Allow users to remove a movie to their list of favorites</td>
+            <td>DELETE</td>
+            <td>/users/:username/favorites/:title</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Allow existing users to deregister</td>
+            <td>DELETE</td>
+            <td>/users/:username</td>
+            <td></td>
+        </tr>
+    </table>
+
+
 </body>
 
 </html>
