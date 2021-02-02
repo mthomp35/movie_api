@@ -3,7 +3,7 @@ const express = require('express'),
 
 const app = express();
 
-let topTenMovies = [
+let allMovies = [
     {
         title: 'The birds',
         year: '2000'
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 // Return list of all movies
 app.get('/movies', (req, res) => {
-    res.json(allMovies);
+    //res.json(allMovies);
     res.send('Successful GET request returning all movies');
 });
 
