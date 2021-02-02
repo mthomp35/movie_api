@@ -18,67 +18,89 @@
             <th>Description</th>
             <th>Request Method</th>
             <th>URL Endpoint</th>
-            <th>Response</th>
+            <th>Query Parameters</th>
+            <th>Request Body Format</th>
+            <th>Response Body Format</th>
         </tr>
         <tr>
             <td>Return list of all movies</td>
             <td>GET</td>
             <td>/movies</td>
-            <td></td>
+            <td>None</td>
+            <td>None</td>
+            <td>A JSON object with a list of movies</td>
         </tr>
         <tr>
             <td>Return data about a single movie by title</td>
             <td>GET</td>
             <td>/movies/:title</td>
-            <td></td>
+            <td>Movie Title</td>
+            <td>None</td>
+            <td>A JSON object with data about a specific movie</td>
         </tr>
         <tr>
-            <td>Return data about a genre by title</td>
+            <td>Return data about a genre by name/title</td>
             <td>GET</td>
             <td>/movies/genres/:title</td>
-            <td></td>
+            <td>Movie Title</td>
+            <td>None</td>
+            <td>A JSON object with data about the genre of a movie</td>
         </tr>
         <tr>
             <td>Return data about a director by name</td>
             <td>GET</td>
             <td>/movies/directors/:name</td>
-            <td></td>
+            <td>Director's Name</td>
+            <td>None</td>
+            <td>A JSON object with data about a director</td>
         </tr>
         <tr>
             <td>Return list of all users</td>
             <td>GET</td>
             <td>/users</td>
-            <td></td>
+            <td>None</td>
+            <td>None</td>
+            <td>A JSON object with data about all registered users</td>
         </tr>
         <tr>
             <td>Allow new users to register</td>
             <td>POST</td>
             <td>/users</td>
-            <td></td>
+            <td>None</td>
+            <td>A JSON object with data about the user registering/being added</td>
+            <td>A JSON object with data about the user that was registered/added</td>
         </tr>
         <tr>
             <td>Allow users to update their user info based on username</td>
             <td>PUT</td>
             <td>/users/:username</td>
-            <td></td>
+            <td>Username</td>
+            <td>None</td>
+            <td>A text message confirming successful update of user information</td>
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites</td>
             <td>PUT</td>
             <td>/users/:username/favorites/:title</td>
-            <td></td>
+            <td>Username, Movie Title</td>
+            <td>None</td>
+            <td>A text message confirming the selected movie was added to favorites</td>
         </tr>
         <tr>
             <td>Allow users to remove a movie to their list of favorites</td>
             <td>DELETE</td>
             <td>/users/:username/favorites/:title</td>
-            <td></td>
+            <td>Username, Movie Title</td>
+            <td>None</td>
+            <td>A text message confirming the selected movie was removed from favorites</td>
         </tr>
         <tr>
             <td>Allow existing users to deregister</td>
             <td>DELETE</td>
             <td>/users/:username</td>
-            <td></td>
+            <td>Username</td>
+            <td>None</td>
+            <td>A text message confirming successful removal of user registration and information</td>
         </tr>
     </table>
 
