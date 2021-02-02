@@ -78,6 +78,11 @@ app.delete('/users/:username/favorites/:title', (req, res) => {
     res.send('Successfully DELETE (remove) movie title from user favorites list and return 201 status with success message');
 });
 
+// Allow existing users to deregister
+app.delete('/users/:username', (req, res) => {
+    res.send('Successfully DELETE (remove) user registration and data from user list and return 201 status with success message');
+});
+
 app.listen(8080, () => {
     console.log('This app is listening to port 8080.');
 });
