@@ -39,8 +39,18 @@ app.get('/movies', (req, res) => {
 });
 
 // Return data about a single movie by title
-app.get('/movies', (req, res) => {
+app.get('/movies/:title', (req, res) => {
     res.send('Successful GET request returning data about a single movie based on title');
+});
+
+// Return data about a genre by title
+app.get('/genres/:title', (req, res) => {
+    res.send('Successful GET request returning data about a genre based on movie title');
+});
+
+// Return data about a director by name
+app.get('/directors/:name', (req, res) => {
+    res.send('Successful GET request returning data about a director based on name');
 });
 
 app.listen(8080, () => {
