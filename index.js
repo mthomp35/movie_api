@@ -102,6 +102,18 @@ app.post('/users', (req, res) => {
     });
 });
 
+// Get user information based on their username
+app.get('/users/:Username', (req, res) => {
+    Users.findOne({Username: req.params.Username })
+    .then((user) => {
+        res.json(user);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
+});
+
 // Allow users to update their user info based on username
 app.put('/users/:username', (req, res) => {
     res.send('Successfully PUT (update) user info and return 201 status with success message');
