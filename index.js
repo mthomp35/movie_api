@@ -116,7 +116,26 @@ app.get('/users/:Username', (req, res) => {
 
 // Allow users to update their user info based on username
 app.put('/users/:username', (req, res) => {
-    res.send('Successfully PUT (update) user info and return 201 status with success message');
+    Users.findOneAndUpdate({Username: req.params.Username }, 
+    { $set:
+        {
+            FirstName: req.body.FirstName,
+            LastName: req.body.LastName,
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birth: req.body.Birth
+        }
+    },
+    { new: true }, // This line makes sure the udpated document is returned
+    (err, updatedUser) => {
+        if(err) {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        } else {
+            res.json(updateUser);
+        }
+    });
 });
 
 // Allow users to add a movie to their list of favorites
