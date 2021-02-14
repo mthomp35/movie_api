@@ -79,17 +79,25 @@
             <td>A JSON object with data about the user that was registered/added</td>
         </tr>
         <tr>
-            <td>Allow users to update their user info based on username</td>
-            <td>PUT</td>
-            <td>/users/:username</td>
+            <td>Return information for a single user based on username</td>
+            <td>GET</td>
+            <td>/users/:Username</td>
             <td>Username</td>
             <td>None</td>
-            <td>A text message confirming successful update of user information</td>
+            <td>A JSON object with data about the user</td>
+        </tr>
+        <tr>
+            <td>Allow users to update their user info based on username</td>
+            <td>PUT</td>
+            <td>/users/:Username</td>
+            <td>Username</td>
+            <td>None</td>
+            <td>A text message confirming successful update of user information and JSON object showing the updated information</td>
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites</td>
-            <td>PUT</td>
-            <td>/users/:username/favorites/:title</td>
+            <td>POST</td>
+            <td>/users/:Username/Movies/:MovieID</td>
             <td>Username, Movie Title</td>
             <td>None</td>
             <td>A text message confirming the selected movie was added to favorites</td>
@@ -97,7 +105,7 @@
         <tr>
             <td>Allow users to remove a movie to their list of favorites</td>
             <td>DELETE</td>
-            <td>/users/:username/favorites/:title</td>
+            <td>/users/:Username/Movies/:MovieID</td>
             <td>Username, Movie Title</td>
             <td>None</td>
             <td>A text message confirming the selected movie was removed from favorites</td>
@@ -105,7 +113,7 @@
         <tr>
             <td>Allow existing users to deregister</td>
             <td>DELETE</td>
-            <td>/users/:username</td>
+            <td>/users/:Username</td>
             <td>Username</td>
             <td>None</td>
             <td>A text message confirming successful removal of user registration and information</td>
