@@ -5,16 +5,18 @@ const express = require('express'),
     Models = require('./models.js');
 
 const app = express();
-app.use(bodyParser.json());
+
 const Movies = Models.Movie;
 const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { use NewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
-app.use(morgan('common'));
-app.use(express.static('public'));
+app.use(morgan('common')); // logs IP addr, date, time, method, status
+app.use(bodyParser.json()); // read req.body of HTTP requests
+app.use(express.static('public')); // opens static documenation page
 
+// General error handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Oops...something went wrong!');
