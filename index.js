@@ -4,7 +4,7 @@ const express = require('express'),
     Models = require('./models.js');
 
 const app = express();
-const Movies = Models.Movies;
+const Movies = Models.Movie;
 const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { use NewUrlParser: true, useUnifiedTopology: true });
