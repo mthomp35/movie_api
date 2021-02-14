@@ -1,5 +1,6 @@
 const express = require('express'),
     morgan = require('morgan'),
+    bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     Models = require('./models.js');
 
