@@ -63,12 +63,20 @@ app.get('/directors/:name', (req, res) => {
 
 // Return list of all users
 app.get('/users', (req, res) => {
-    res.send('Successful GET request returning list of all users');
+    Users.find()
+    .then((users) => {
+        res.status(201).json(users);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Register new users
 app.post('/users', (req, res) => {
-    Users.findOne({ Username: req.body.Username}).then((user) => {
+    Users.findOne({ Username: req.body.Username})
+    .then((user) => {
         if (user) {
             return res.status(400).send(req.body.Username + 'already exists');
         } else {
