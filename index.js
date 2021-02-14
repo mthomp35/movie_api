@@ -5,6 +5,7 @@ const express = require('express'),
     Models = require('./models.js');
 
 const app = express();
+app.use(bodyParser.json());
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -67,7 +68,30 @@ app.get('/users', (req, res) => {
 
 // Register new users
 app.post('/users', (req, res) => {
-    res.send('Successfully POST (create) new user and return 201 status with success message');
+    Users.findOne({ Username: req.body.Username}).then((user) => {
+        if (user) {
+            return res.status(400).send(req.body.Username + 'already exists');
+        } else {
+            Users
+                .create({
+                    FirstName: req.body.FirstName,
+                    LastName: req.body.LastName,
+                    Username: req.body.Username,
+                    Password: req.body.Password,
+                    Email: req.body.Email,
+                    Birth: req.body.Birth
+                })
+                .then((user) =>{res.status(201).json(user) })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send('Error: ' + error);
+            })
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+    });
 });
 
 // Allow users to update their user info based on username
