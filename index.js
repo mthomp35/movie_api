@@ -42,7 +42,7 @@ app.get('/movies', (req, res) => {
 app.get('/movies/:Title', (req, res) => {
     Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
-        res.status(201).json(users);
+        res.status(201).json(movie);
         })
         .catch((err) => {
             console.error(err);
