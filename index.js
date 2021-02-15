@@ -1,15 +1,14 @@
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    Models = require('./models.js');
-
+    mongoose = require('mongoose');
+    
 const app = express();
-
+const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { use NewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
 app.use(morgan('common')); // logs IP addr, date, time, method, status
