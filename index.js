@@ -66,7 +66,7 @@ app.get('/movies/genres/:Title', (req, res) => {
 app.get('/movies/directors/:Name', (req, res) => {
     Movies.findOne({ 'Director.Name': req.params.Name })
     .then((director) => {
-        res.status(201).json(director);
+        res.status(201).json(director.Director);
     })
     .catch((err) => {
         console.error(err);
@@ -167,7 +167,7 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 });
 
 // Allow users to remove a movie from their list of favorites
-app.post('/users/:Username/Movies/:MovieID', (req, res) => {
+app.delete('/users/:Username/Movies/:MovieID', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $pull: { FavoriteMovies: req.params.MovieID }},
     { new: true },
