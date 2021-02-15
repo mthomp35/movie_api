@@ -27,7 +27,7 @@ let userSchema = mongoose.Schema({
     Email: {type: String, required: true},
     Birth: Date,
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
-}),
+});
 
 let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
