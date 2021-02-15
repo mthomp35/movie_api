@@ -53,7 +53,7 @@ app.get('/movies/:Title', (req, res) => {
 
 // Return data about a genre by title
 app.get('/movies/genres/:Title', (req, res) => {
-    Movies.findOne({ Title: req.body.Title })
+    Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
         res.status(201).json(movie.Genre);
     })
