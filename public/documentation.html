@@ -34,7 +34,7 @@
         <tr>
             <td>Return data about a single movie by title</td>
             <td>GET</td>
-            <td>/movies/:title</td>
+            <td>/movies/:Title</td>
             <td>Movie Title</td>
             <td>None</td>
             <td>A JSON object with data about a specific movie</td>
@@ -42,7 +42,7 @@
         <tr>
             <td>Return data about a genre by name/title</td>
             <td>GET</td>
-            <td>/movies/genres/:title</td>
+            <td>/movies/genres/:Title</td>
             <td>Movie Title</td>
             <td>None</td>
             <td>A JSON object with data about the genre of a movie</td>
@@ -50,7 +50,7 @@
         <tr>
             <td>Return data about a director by name</td>
             <td>GET</td>
-            <td>/movies/directors/:name</td>
+            <td>/movies/directors/:Name</td>
             <td>Director's Name</td>
             <td>None</td>
             <td>A JSON object with data about a director</td>
@@ -100,7 +100,7 @@
             <td>/users/:Username/Movies/:MovieID</td>
             <td>Username, Movie Title</td>
             <td>None</td>
-            <td>A text message confirming the selected movie was added to favorites</td>
+            <td>A text message confirming the selected movie was added to favorites and JSON object showing the updated information</td>
         </tr>
         <tr>
             <td>Allow users to remove a movie to their list of favorites</td>
@@ -108,7 +108,7 @@
             <td>/users/:Username/Movies/:MovieID</td>
             <td>Username, Movie Title</td>
             <td>None</td>
-            <td>A text message confirming the selected movie was removed from favorites</td>
+            <td>A text message confirming the selected movie was removed from favorites and JSON object showing the updated information</td>
         </tr>
         <tr>
             <td>Allow existing users to deregister</td>
@@ -116,7 +116,7 @@
             <td>/users/:Username</td>
             <td>Username</td>
             <td>None</td>
-            <td>A text message confirming successful removal of user registration and information</td>
+            <td>A text message confirming successful removal of user</td>
         </tr>
     </table>
 
