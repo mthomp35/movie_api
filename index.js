@@ -43,7 +43,7 @@ app.get('/movies', (req, res) => {
 app.get('/movies/:Title', (req, res) => {
     Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
-        res.statusMessage(201).json(users);
+        res.status(201).json(users);
         })
         .catch((err) => {
             console.error(err);
@@ -52,8 +52,15 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // Return data about a genre by title
-app.get('/movies/genres/:title', (req, res) => {
-    res.send('Successful GET request returning data about a genre based on movie title');
+app.get('/movies/genres/:Title', (req, res) => {
+    Movies.findOne({ Title: req.body.Title })
+    .then((movie) => {
+        res.status(201).json(movie.Genre);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return data about a director by name
