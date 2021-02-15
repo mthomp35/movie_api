@@ -64,8 +64,15 @@ app.get('/movies/genres/:Title', (req, res) => {
 });
 
 // Return data about a director by name
-app.get('/directors/:name', (req, res) => {
-    res.send('Successful GET request returning data about a director based on name');
+app.get('/movies/directors/:Name', (req, res) => {
+    Movies.findOne({ 'Director.Name': req.params.Name })
+    .then((director) => {
+        res.status(201).json(director);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return list of all users
