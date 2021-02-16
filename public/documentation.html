@@ -29,7 +29,26 @@
             <td>/movies</td>
             <td>None</td>
             <td>None</td>
-            <td>A JSON object with a list of movies</td>
+            <td>A JSON object with a list of movies. Structure example:
+                <br>{
+                    "Genre": {
+                        "Name": "Comedy",
+                        "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
+                    },
+                    "Director": {
+                        "Name": "Adam McKay",
+                        "Bio": "Adam McKay is an American film and television director, producer, screenwriter, and comedian.",
+                        "Birth": "1968-04-17T00:00:00.000Z"
+                    },
+                    "Actors": [],
+                    "_id": "60220bf8e11574a9a3baf465",
+                    "Title": "Anchorman: The Legend of Ron Burgundy",
+                    "Description": "A tongue-in-cheek take on the culture of the 1970s, particularly the new Action News format. It portrays a San Diego television station where the lead Anchor clashes with his new female counterpart.",
+                    "Year": "2004-01-01T00:00:00.000Z",
+                    "ImagePath": "anchorman_the_legend_of_ron_burgundy.png",
+                    "Featured": true
+                }
+            </td>
         </tr>
         <tr>
             <td>Return data about a single movie by title</td>
@@ -37,7 +56,26 @@
             <td>/movies/:Title</td>
             <td>Movie Title</td>
             <td>None</td>
-            <td>A JSON object with data about a specific movie</td>
+            <td>A JSON object with data about a specific movie. Structure example:
+                <br>{
+                    "Genre": {
+                        "Name": "Comedy",
+                        "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
+                    },
+                    "Director": {
+                        "Name": "Adam McKay",
+                        "Bio": "Adam McKay is an American film and television director, producer, screenwriter, and comedian.",
+                        "Birth": "1968-04-17T00:00:00.000Z"
+                    },
+                    "Actors": [],
+                    "_id": "60220bf8e11574a9a3baf465",
+                    "Title": "Anchorman: The Legend of Ron Burgundy",
+                    "Description": "A tongue-in-cheek take on the culture of the 1970s, particularly the new Action News format. It portrays a San Diego television station where the lead Anchor clashes with his new female counterpart.",
+                    "Year": "2004-01-01T00:00:00.000Z",
+                    "ImagePath": "anchorman_the_legend_of_ron_burgundy.png",
+                    "Featured": true
+                }
+            </td>
         </tr>
         <tr>
             <td>Return data about a genre by name/title</td>
@@ -45,7 +83,12 @@
             <td>/movies/genres/:Title</td>
             <td>Movie Title</td>
             <td>None</td>
-            <td>A JSON object with data about the genre of a movie</td>
+            <td>A JSON object with data about the genre of a movie. Structure example:
+                <br>{
+                <br>"Name": "Science Fiction",
+                <br>"Description": "Science fiction (or sci-fi) is a film genre that uses speculative, fictional science-based depictions of phenomena that are not fully accepted by mainstream science, such as extraterrestrial lifeforms, alien worlds, extrasensory perception and time travel, along with futuristic elements such as spacecraft, robots, cyborgs, interstellar travel or other technologies. Science fiction films have often been used to focus on political or social issues, and to explore philosophical issues like the human condition."
+                <br>}
+            </td>
         </tr>
         <tr>
             <td>Return data about a director by name</td>
@@ -53,7 +96,13 @@
             <td>/movies/directors/:Name</td>
             <td>Director's Name</td>
             <td>None</td>
-            <td>A JSON object with data about a director</td>
+            <td>A JSON object with data about a director. Structure example:
+                <br>{
+                <br>"Name": "Jeffrey Jacob Abrams",
+                <br>"Bio": "J. J. Abrams is an American film director, producer, and screenwriter. He is known for his work in the genres of action, drama, and science fiction.",
+                <br>"Birth": "1966-06-27T00:00:00.000Z"
+                <br>}
+            </td>
         </tr>
         <tr>
             <td>Return list of all users</td>
@@ -61,22 +110,48 @@
             <td>/users</td>
             <td>None</td>
             <td>None</td>
-            <td>A JSON object with data about all registered users</td>
+            <td>A JSON object with data about all registered users. Structure example:
+                <br>{
+                <br>"FavoriteMovies": [
+                <br>    "60221214e11574a9a3baf467",
+                <br>    "60234245e11574a9a3baf469"
+                <br>],
+                <br>"_id": "60235e0ce11574a9a3baf46f",
+                <br>"FirstName": "Rosie",
+                <br>"LastName": "Riveter",
+                <br>"Username": "rosietheriveter",
+                <br>"Password": "wecandoit",
+                <br>"Email": "rosieriveter@gmail.com",
+                <br>"Birth": "1942-12-07T00:00:00.000Z"
+                <br>}
+            </td>
         </tr>
         <tr>
             <td>Allow new users to register</td>
             <td>POST</td>
             <td>/users</td>
             <td>None</td>
-            <td>A JSON object with data about the user registering/being added
-                <br>Structure Example:
-                <br>{ 
-                <br>name: "Will Ferrell",
-                <br>username: "willfis#1",
-                <br>email: "willfis#1@gmail.com"
+            <td>A JSON object with data about the user registering/being added. Structure example:
+                <br>{
+                    <br>"FirstName": "Rosie",
+                    <br>"LastName": "Riveter",
+                    <br>"Username": "rosietheriveter",
+                    <br>"Password": "wecandoit",
+                    <br>"Email": "rosieriveter@gmail.com",
+                    <br>"Birth": "1942-12-07T00:00:00.000Z"
                 <br>}
             </td>
-            <td>A JSON object with data about the user that was registered/added</td>
+            <td>A JSON object with data about the user that was registered/added. Structure example:
+                <br>{
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Rosie",
+                    <br>"LastName": "Riveter",
+                    <br>"Username": "rosietheriveter",
+                    <br>"Password": "wecandoit",
+                    <br>"Email": "rosieriveter@gmail.com",
+                    <br>"Birth": "1942-12-07T00:00:00.000Z"
+                <br>}
+            </td>
         </tr>
         <tr>
             <td>Return information for a single user based on username</td>
@@ -84,7 +159,21 @@
             <td>/users/:Username</td>
             <td>Username</td>
             <td>None</td>
-            <td>A JSON object with data about the user</td>
+            <td>A JSON object with data about the user. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467",
+                    <br>    "60234245e11574a9a3baf469"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Rosie",
+                    <br>"LastName": "Riveter",
+                    <br>"Username": "rosietheriveter",
+                    <br>"Password": "wecandoit",
+                    <br>"Email": "rosieriveter@gmail.com",
+                    <br>"Birth": "1942-12-07T00:00:00.000Z"
+                    <br>}
+            </td>
         </tr>
         <tr>
             <td>Allow users to update their user info based on username</td>
@@ -92,7 +181,21 @@
             <td>/users/:Username</td>
             <td>Username</td>
             <td>None</td>
-            <td>A text message confirming successful update of user information and JSON object showing the updated information</td>
+            <td>A text message confirming successful update of user information and JSON object showing the updated information. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467",
+                    <br>    "60234245e11574a9a3baf469"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Rosie",
+                    <br>"LastName": "Riveter",
+                    <br>"Username": "rosietheriveter",
+                    <br>"Password": "wecandoit",
+                    <br>"Email": "rosieriveter@gmail.com",
+                    <br>"Birth": "1942-12-07T00:00:00.000Z"
+                    <br>}
+            </td>
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites</td>
@@ -100,7 +203,21 @@
             <td>/users/:Username/Movies/:MovieID</td>
             <td>Username, Movie Title</td>
             <td>None</td>
-            <td>A text message confirming the selected movie was added to favorites and JSON object showing the updated information</td>
+            <td>A text message confirming the selected movie was added to favorites and JSON object showing the updated information. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467",
+                    <br>    "60234245e11574a9a3baf469"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Rosie",
+                    <br>"LastName": "Riveter",
+                    <br>"Username": "rosietheriveter",
+                    <br>"Password": "wecandoit",
+                    <br>"Email": "rosieriveter@gmail.com",
+                    <br>"Birth": "1942-12-07T00:00:00.000Z"
+                    <br>}
+            </td>
         </tr>
         <tr>
             <td>Allow users to remove a movie to their list of favorites</td>
@@ -108,7 +225,20 @@
             <td>/users/:Username/Movies/:MovieID</td>
             <td>Username, Movie Title</td>
             <td>None</td>
-            <td>A text message confirming the selected movie was removed from favorites and JSON object showing the updated information</td>
+            <td>A text message confirming the selected movie was removed from favorites and JSON object showing the updated information. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Rosie",
+                    <br>"LastName": "Riveter",
+                    <br>"Username": "rosietheriveter",
+                    <br>"Password": "wecandoit",
+                    <br>"Email": "rosieriveter@gmail.com",
+                    <br>"Birth": "1942-12-07T00:00:00.000Z"
+                    <br>}
+            </td>
         </tr>
         <tr>
             <td>Allow existing users to deregister</td>
@@ -116,7 +246,7 @@
             <td>/users/:Username</td>
             <td>Username</td>
             <td>None</td>
-            <td>A text message confirming successful removal of user</td>
+            <td>A text message confirming successful removal of user.</td>
         </tr>
     </table>
 
