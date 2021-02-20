@@ -15,7 +15,7 @@ let generateJWTToken = (user) => {
     });
 }
 
-// POST login
+// POST login - check to see if username & password exist, if not, return error message
 module.exports = (router) => {
     router.post('/login', (req, res) => {
         passport.authenticate('local', { session: false }, (error, user, info) => {
