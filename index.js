@@ -8,12 +8,17 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+const passport = require('passport');
+require('./passport');
+
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
 app.use(morgan('common')); // logs IP addr, date, time, method, status
 app.use(bodyParser.json()); // read req.body of HTTP requests
 app.use(express.static('public')); // opens static documenation page
+
+let auth = require('./auth')(app);
 
 // General error handling
 app.use((err, req, res, next) => {
