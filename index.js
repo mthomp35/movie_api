@@ -1,7 +1,8 @@
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    cors = require('cors');
     
 const app = express();
 const Models = require('./models.js');
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 app.use(morgan('common')); // logs IP addr, date, time, method, status
 app.use(bodyParser.json()); // read req.body of HTTP requests
 app.use(express.static('public')); // opens static documenation page
+app.use(cors()); // implement cross-origin resource sharing
 
 let auth = require('./auth')(app);
 
