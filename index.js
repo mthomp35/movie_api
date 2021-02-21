@@ -95,6 +95,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
 
 // Register new users
 app.post('/users', (req, res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
         if (user) {
@@ -105,7 +106,7 @@ app.post('/users', (req, res) => {
                     FirstName: req.body.FirstName,
                     LastName: req.body.LastName,
                     Username: req.body.Username,
-                    Password: req.body.Password,
+                    Password: hashedPassword,
                     Email: req.body.Email,
                     Birth: req.body.Birth
                 })
