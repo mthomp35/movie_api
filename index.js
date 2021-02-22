@@ -12,6 +12,8 @@ const Users = Models.User;
 const passport = require('passport');
 require('./passport');
 
+const { check, validationResult } = require('express-validator');
+
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
