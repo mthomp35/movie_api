@@ -96,7 +96,15 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
 });
 
 // Register new users
-app.post('/users', (req, res) => {
+app.post('/users', [
+    // middleware using express-validator to validate format & characters in user inputs
+    check('FirstName', 'First name is required.').not().isEmpty(),
+    check('LastName', 'Last name is required.').not().isEmpty(),
+    check('Username', 'Username is required.').isLength({min: 5}),
+    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').isLength({min: 12}),
+    check('Email', 'Please enter a valid email address.').isEmail()
+    ], (req, res) => {
     let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
