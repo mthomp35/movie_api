@@ -105,32 +105,36 @@ app.post('/users', [
     check('Password', 'Password is required').isLength({min: 12}),
     check('Email', 'Please enter a valid email address.').isEmail()
     ], (req, res) => {
-    let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
-    Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-        if (user) {
-            return res.status(400).send(req.body.Username + 'already exists');
-        } else {
-            Users
-                .create({
-                    FirstName: req.body.FirstName,
-                    LastName: req.body.LastName,
-                    Username: req.body.Username,
-                    Password: hashedPassword,
-                    Email: req.body.Email,
-                    Birth: req.body.Birth
-                })
-                .then((user) =>{res.status(201).json(user) })
-            .catch((error) => {
-                console.error(error);
-                res.status(500).send('Error: ' + error);
-            })
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
         }
-    })
-    .catch((error) => {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
-    });
+        let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
+        Users.findOne({ Username: req.body.Username })
+        .then((user) => {
+            if (user) {
+                return res.status(400).send(req.body.Username + 'already exists');
+            } else {
+                Users
+                    .create({
+                        FirstName: req.body.FirstName,
+                        LastName: req.body.LastName,
+                        Username: req.body.Username,
+                        Password: hashedPassword,
+                        Email: req.body.Email,
+                        Birth: req.body.Birth
+                    })
+                    .then((user) =>{res.status(201).json(user) })
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send('Error: ' + error);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
 });
 
 // Get user information based on their username
@@ -215,6 +219,9 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
     });
 });
 
-app.listen(8080, () => {
-    console.log('This app is listening to port 8080.');
+// Allow port number to change
+// Look for a pre-configured port number in the environment variable, and if nothing is found, sets to 8080
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+    console.log('This app is listening on Port' + port);
 });
