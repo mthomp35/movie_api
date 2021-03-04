@@ -14,7 +14,7 @@ require('./passport');
 
 const { check, validationResult } = require('express-validator');
 
-mongoose.connect('process.env.CONNECTION_URI', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // connect to local mongoose database
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -105,7 +105,7 @@ app.post('/users', [
     check('LastName', 'Last name is required.').not().isEmpty(),
     check('Username', 'Username is required.').isLength({min: 5}),
     check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').isLength({min: 12}),
+    check('Password', 'Password is required').isLength({min: 5}),
     check('Email', 'Please enter a valid email address.').isEmail()
     ], (req, res) => {
         let errors = validationResult(req);
