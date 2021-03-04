@@ -14,9 +14,10 @@ require('./passport');
 
 const { check, validationResult } = require('express-validator');
 
+// connect online MongoDB Atlas to Heroku
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// connect to local mongoose database
+// connect to local mongoose database (on my computer)
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
