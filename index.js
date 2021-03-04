@@ -153,7 +153,20 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 // Allow users to update their user info based on username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
+    // middleware using express-validator to validate format & characters in user inputs
+    check('FirstName', 'First name is required.').not().isEmpty(),
+    check('LastName', 'Last name is required.').not().isEmpty(),
+    check('Username', 'Username is required.').isLength({min: 5}),
+    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').isLength({min: 5}), // Adjusted to 5 for testing purposes
+    check('Email', 'Please enter a valid email address.').isEmail()
+], (req, res) => {
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
     Users.findOneAndUpdate({ Username: req.params.Username }, 
     { $set:
         {
