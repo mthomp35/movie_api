@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 });
 
 // Return list of all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
     .then((movies) => {
         res.status(201).json(movies);
@@ -140,6 +140,28 @@ app.post('/users', [
             res.status(500).send('Error: ' + error);
         });
 });
+
+// User login
+/*app.post('/login', passport.authenticate('jwt', { session: false }), [
+    // middleware using express-validator to validate format & characters in user inputs
+    check('Username', 'Username is required.').not().isEmpty(),
+    check('Password', 'Password is required').not().isEmpty()
+    ], (req, res) => {
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
+        Users.findOne({ Username: req.body.Username })
+        .then((user) => {
+            res.status(201).json(movies)
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+        });
+    }
+);*/
 
 // Get user information based on their username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
