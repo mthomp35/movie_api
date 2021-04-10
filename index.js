@@ -141,23 +141,6 @@ app.post('/users', [
         });
 });
 
-// User login
-app.post('/login', passport.authenticate('jwt', { session: false }), [
-    // middleware using express-validator to validate format & characters in user inputs
-    check('Username', 'Username is required.').not().isEmpty(),
-    check('Password', 'Password is required').not().isEmpty()
-    ], (req, res) => {
-        Users.findOne({ Username: req.params.Username })
-        .then((movies) => {
-            res.status(201).json(movies)
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        });
-    }
-);
-
 // Get user information based on their username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne({ Username: req.params.Username })
