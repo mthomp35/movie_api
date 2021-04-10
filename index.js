@@ -147,10 +147,6 @@ app.post('/login', passport.authenticate('jwt', { session: false }), [
     check('Username', 'Username is required.').not().isEmpty(),
     check('Password', 'Password is required').not().isEmpty()
     ], (req, res) => {
-        let errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
         Users.findOne({ Username: req.body.Username })
         .then((movies) => {
             res.status(201).json(movies)
