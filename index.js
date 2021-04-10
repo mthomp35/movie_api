@@ -151,9 +151,8 @@ app.post('/login', passport.authenticate('jwt', { session: false }), [
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
         Users.findOne({ Username: req.body.Username })
-        .then((user) => {
+        .then((movies) => {
             res.status(201).json(movies)
         })
         .catch((error) => {
