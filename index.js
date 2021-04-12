@@ -87,18 +87,6 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
     });
 });
 
-// Login
-app.post('/login', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.findOne({ Username: req.params.Username })
-    .then((users) => {
-        res.status(201).json(users);
-    })
-    .catch((err) => {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-    });
-});
-
 // Return list of all users
 app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.find()
