@@ -11,11 +11,11 @@ let movieSchema = mongoose.Schema({
     Director: {
         Name: String,
         Bio: String,
-        Birth: Date,
-        Death: Date
+        Birth: String,
+        Death: String
     },
     Actors: [String],
-    Year: Date,
+    Year: String,
     ImagePath: String,
     Featured: Boolean
 });
@@ -36,6 +36,17 @@ userSchema.statics.hashPassword = (password) => {
 
 userSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.Password);
+};
+//statics sits on class and methods sits on specific user
+userSchema.statics.serialize = function(user) {
+    return {
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+        Username: user.Username,
+        Email: user.Email,
+        Birth: user.Birth,
+        FavoriteMovies: user.FavoriteMovies
+    }
 };
 
 let Movie = mongoose.model('Movie', movieSchema);

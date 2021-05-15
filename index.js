@@ -1,3 +1,4 @@
+//two node packages xss and dotenv - for my next time with Ted
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
@@ -15,10 +16,10 @@ require('./passport');
 const { check, validationResult } = require('express-validator');
 
 // connect online MongoDB Atlas to Heroku
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // connect to local mongoose database (on my computer)
-// mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
 app.use(morgan('common')); // logs IP addr, date, time, method, status
@@ -87,11 +88,11 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
     });
 });
 
-// Return list of all users
-app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+// Return list of all users passport.authenticate('jwt', { session: false }),
+app.get('/users', (req, res) => {
     Users.find()
     .then((users) => {
-        res.status(201).json(users);
+        res.status(201).json(users.map(user => Users.serialize(user)));
     })
     .catch((err) => {
         console.error(err);
@@ -128,7 +129,7 @@ app.post('/users', [
                         Email: req.body.Email,
                         Birth: req.body.Birth
                     })
-                    .then((user) =>{res.status(201).json(user) })
+                    .then((user) =>{res.status(201).json(Users.serialize(user)) })
                 .catch((error) => {
                     console.error(error);
                     res.status(500).send('Error: ' + error);
@@ -145,7 +146,7 @@ app.post('/users', [
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne({ Username: req.params.Username })
     .then((user) => {
-        res.json(user);
+        res.json(Users.serialize(user));
     })
     .catch((err) => {
         console.error(err);
@@ -158,34 +159,37 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     // middleware using express-validator to validate format & characters in user inputs
     check('FirstName', 'First name is required.').not().isEmpty(),
     check('LastName', 'Last name is required.').not().isEmpty(),
-    check('Username', 'Username is required.').isLength({min: 5}),
-    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').isLength({min: 5}), // Adjusted to 5 for testing purposes
+    //check('Username', 'Username is required.').isLength({min: 5}),
+    //check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+    //check('Password', 'Password is required').isLength({min: 5}), // Adjusted to 5 for testing purposes
     check('Email', 'Please enter a valid email address.').isEmail()
 ], (req, res) => {
     let errors = validationResult(req);
+    console.log(req.body, errors);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-    let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
+    let updateObj = {
+        FirstName: req.body.FirstName,
+        LastName: req.body.LastName,
+        Username: req.body.Username,
+        Email: req.body.Email,
+        Birth: req.body.Birth
+    }
+    if(req.body.Password) {
+        let hashedPassword = Users.hashPassword(req.body.Password); // hash any password entered by user when registering before storing it in mongoDB
+        updateObj.Password = hashedPassword
+    }
+    
     Users.findOneAndUpdate({ Username: req.params.Username }, 
-    { $set:
-        {
-            FirstName: req.body.FirstName,
-            LastName: req.body.LastName,
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birth: req.body.Birth
-        }
-    },
+    { $set: updateObj },
     { new: true }, // This line makes sure the udpated document is returned
     (err, updatedUser) => {
         if(err) {
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.json(updatedUser);
+            res.json(Users.serialize(updatedUser));
         }
     });
 });
@@ -200,7 +204,7 @@ app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { sess
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.json(updatedUser);
+            res.json(Users.serialize(updatedUser));
         }
     });
 });
@@ -215,7 +219,7 @@ app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { se
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.json(updatedUser);
+            res.json(User.serialize(updatedUser));
         }
     });
 });
