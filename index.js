@@ -1,7 +1,8 @@
 //two node packages xss and dotenv - for my next time with Ted
+//reminder: push all changes to git push heroku main
 const express = require('express'),
     morgan = require('morgan'),
-    bodyParser = require('body-parser'),
+   // bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     cors = require('cors');
     
@@ -23,7 +24,7 @@ const { check, validationResult } = require('express-validator');
 
 // Middleware
 app.use(morgan('common')); // logs IP addr, date, time, method, status
-app.use(bodyParser.json()); // read req.body of HTTP requests
+app.use(express.json()); // read req.body of HTTP requests
 app.use(express.static('public')); // opens static documenation page
 app.use(cors()); // implement cross-origin resource sharing
 
