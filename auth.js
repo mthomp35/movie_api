@@ -1,6 +1,7 @@
 // creates new endpoint for registered users to log in, authenticates login requests using basic HTTP authentication & generates a JWT for the user
+const config = require('./config');
 
-const jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy
+const jwtSecret = config.JWT_SECRET; // This has to be the same key used in the JWTStrategy
 
 const jwt = require('jsonwebtoken'),
     passport = require('passport');
