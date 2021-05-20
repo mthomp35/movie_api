@@ -1,6 +1,8 @@
 //two node packages xss and dotenv - for my next time with Ted
 //reminder: push all changes to git push heroku main
-const express = require('express'),
+require('dotenv').config();
+const config = require('./config'),
+    express = require('express'),
     morgan = require('morgan'),
    // bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
@@ -17,10 +19,10 @@ require('./passport');
 const { check, validationResult } = require('express-validator');
 
 // connect online MongoDB Atlas to Heroku
-//mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // connect to local mongoose database (on my computer)
- mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
 app.use(morgan('common')); // logs IP addr, date, time, method, status
@@ -42,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 // Return list of all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+/*app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
     .then((movies) => {
         res.status(201).json(movies);
@@ -51,6 +53,17 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
         console.error(err);
         res.status(500).send('Error: ' + err);
     });
+});*/
+
+// Return all movies written with async await
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    try {
+        let movies = await Movies.find(); //await shuts down function until this line is resolved
+        res.status(201).json(movies);
+    } catch(err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    }
 });
 
 // Return data about a single movie by title
