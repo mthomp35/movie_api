@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const xss = require('xss');
 
 let movieSchema = mongoose.Schema({
     Title: {type: String, required: true},
@@ -40,12 +41,12 @@ userSchema.methods.validatePassword = function(password) {
 //statics sits on class and methods sits on specific user
 userSchema.statics.serialize = function(user) {
     return {
-        FirstName: user.FirstName,
-        LastName: user.LastName,
-        Username: user.Username,
-        Email: user.Email,
-        Birth: user.Birth,
-        FavoriteMovies: user.FavoriteMovies
+        FirstName: xss(user.FirstName),
+        LastName: xss(user.LastName),
+        Username: xss(user.Username),
+        Email: xss(user.Email),
+        Birth: xss(user.Birth),
+        FavoriteMovies: xss(user.FavoriteMovies)
     }
 };
 
