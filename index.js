@@ -3,7 +3,6 @@ require('dotenv').config();
 const config = require('./config'),
     express = require('express'),
     morgan = require('morgan'),
-   // bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     cors = require('cors');
     
@@ -17,7 +16,7 @@ require('./passport');
 
 const { check, validationResult } = require('express-validator');
 
-// connect online MongoDB Atlas to Heroku
+// connect online MongoDB Atlas to Heroku or local mongoose database depending on config setting
 mongoose.connect(config.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // connect to local mongoose database (on my computer)
