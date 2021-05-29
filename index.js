@@ -1,4 +1,3 @@
-//two node packages xss and dotenv - for my next time with Ted
 //reminder: push all changes to git push heroku main
 require('dotenv').config();
 const config = require('./config'),
