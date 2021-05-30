@@ -231,7 +231,7 @@ app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { se
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.json(User.serialize(updatedUser));
+            res.json(Users.serialize(updatedUser));
         }
     });
 });
